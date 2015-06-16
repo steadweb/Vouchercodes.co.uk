@@ -1,0 +1,15 @@
+{
+    "name": "vouchercodes/cart",
+    "description": "A cart component to handle collections of products",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "author's name",
+            "email": "email@example.com"
+        }
+    ],
+    "require" :{
+        "php" : ">=5.5"
+    }
+}
