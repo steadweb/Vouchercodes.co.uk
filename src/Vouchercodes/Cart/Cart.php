@@ -7,6 +7,8 @@ use Vouchercodes\Product\Product;
 class Cart implements CartInterface
 {
     /**
+     * Array of Vouchercodes\Cart\Item instances
+     *
      * @var array
      */
     var $products = [];
@@ -19,8 +21,8 @@ class Cart implements CartInterface
     {
         $total = 0;
 
-        foreach($this->products as $product) {
-            $total += $product->getTotal();
+        foreach($this->products as $item) {
+            $total += $item->getTotal();
         }
 
         return $total;
@@ -36,8 +38,13 @@ class Cart implements CartInterface
      */
     public function addItem(Product $product, $amount)
     {
-        $product->quantity += $amount;
-        $this->products[$product->getSku()] = $product;
+        if(!array_key_exists($product->getSku(), $this->products)) {
+            $this->products[$product->getSku()] = new Item($product);
+        }
+
+        // Get the item and set the amount
+        $item = $this->products[$product->getSku()];
+        $item->addToQuantity($amount);
     }
 
     /**
@@ -48,14 +55,19 @@ class Cart implements CartInterface
      */
     public function getPriceOf(Product $product)
     {
-        $price = $product->getPrice();
+        if(array_key_exists($product->getSku(), $this->products)) {
+            $line = $this->products[$product->getSku()];
+            $price = $product->getPrice();
 
-        foreach($product->discounts() as $level => $discount) {
-            if($product->quantity >= $level) {
-                $price = $product->getPrice() - $discount;
+            foreach($product->discounts() as $level => $discount) {
+                if($line->getQuantity() >= $level) {
+                    $price = $product->getPrice() - $discount;
+                }
             }
+
+            return $price;
         }
 
-        return $price;
+        return 0;
     }
 }

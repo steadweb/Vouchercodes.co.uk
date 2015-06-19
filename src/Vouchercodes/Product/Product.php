@@ -29,28 +29,4 @@ abstract class Product implements \Vouchercodes\Product\ProductInterface
      * @return float
      */
     abstract public function getPrice();
-
-    /**
-     * @return int
-     */
-    public function getTotal()
-    {
-        $total = 0;
-
-        $quantity = $this->quantity;
-        $price = $this->getPrice();
-
-        foreach($this->discounts() as $discount => $deduct) {
-
-            if($quantity >= $discount) {
-                $total += $price * (int) $discount;
-                $quantity -= $discount;
-                $price -= $deduct;
-            }
-        }
-
-        $total += $price * (int) $quantity;
-
-        return $total;
-    }
 }
