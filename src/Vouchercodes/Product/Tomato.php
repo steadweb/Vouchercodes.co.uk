@@ -24,9 +24,9 @@ class Tomato extends Product
     public function discounts()
     {
         return [
-            new Discount(101, 0.06),
+            new Discount(101, 0.06, Discount::MORE_THAN_EQUAL_TO),
             new Discount(100, 0.04),
-            new Discount(20, 0.02, Discount::MORE_THAN_EQUAL_TO)
+            new Discount(20, 0.02)
         ];
     }
 

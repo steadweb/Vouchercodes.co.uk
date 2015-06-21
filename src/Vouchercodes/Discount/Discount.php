@@ -63,11 +63,12 @@ class Discount
                 return $this->moreThanOrEqualTo($quantity);
                 break;
 
-            default:
             case static::MORE_THAN:
                 return $this->moreThan($quantity);
                 break;
         }
+
+        return 0;
     }
 
     /**

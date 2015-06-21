@@ -21,14 +21,9 @@ class Item
      *
      * @param Product $product
      * @param null $quantity
-     * @throws ProductNotFoundException
      */
     public function __construct(Product $product, $quantity = null)
     {
-        if(is_null($product)) {
-            throw new ProductNotFoundException('Product not found');
-        }
-
         $this->product = $product;
         $this->setQuantity($quantity);
     }
@@ -98,9 +93,3 @@ class Item
         }
     }
 }
-
-/**
- * Class ProductNotFoundException
- * @package Vouchercodes\Cart
- */
-class ProductNotFoundException extends \Exception {}
