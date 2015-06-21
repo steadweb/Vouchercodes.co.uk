@@ -39,20 +39,19 @@ class Item
     public function getTotal()
     {
         $total = 0;
+        $deduct = 0;
 
-        $quantity = $this->quantity;
-        $price = $this->product->getPrice();
+        for($quantity = 1; $quantity <= $this->quantity; $quantity++) {
+            foreach($this->product->discounts() as $discount) {
+                $deduct = $discount->calculate($quantity);
 
-        foreach($this->product->discounts() as $discount => $deduct) {
-
-            if($quantity >= $discount) {
-                $total += $price * (int) $discount;
-                $quantity -= $discount;
-                $price -= $deduct;
+                if($deduct > 0) {
+                    break 1;
+                }
             }
-        }
 
-        $total += $price * (int) $quantity;
+            $total += $this->product->getPrice() - $deduct;
+        }
 
         return $total;
     }

@@ -2,6 +2,8 @@
 
 namespace Vouchercodes\Product;
 
+use Vouchercodes\Discount\Discount;
+
 class Lemon extends Product
 {
     /**
@@ -22,7 +24,7 @@ class Lemon extends Product
     public function discounts()
     {
         return [
-            '10' => 0.05,
+            new Discount(10, 0.05),
         ];
     }
 

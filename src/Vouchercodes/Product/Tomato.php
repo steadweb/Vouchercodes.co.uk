@@ -2,6 +2,8 @@
 
 namespace Vouchercodes\Product;
 
+use Vouchercodes\Discount\Discount;
+
 class Tomato extends Product
 {
     /**
@@ -22,9 +24,9 @@ class Tomato extends Product
     public function discounts()
     {
         return [
-            '20' => 0.02,
-            '100' => 0.04,
-            '101' => 0.06,
+            new Discount(101, 0.06),
+            new Discount(100, 0.04),
+            new Discount(20, 0.02, Discount::MORE_THAN_EQUAL_TO)
         ];
     }
 
