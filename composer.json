@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Vouchercodes\\" : "src/Vouchercodes"
+            "Vouchercodes\\" : ["src/Vouchercodes", "tests"]
         }
     },
     "require" :{
