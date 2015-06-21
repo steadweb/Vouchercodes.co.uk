@@ -5,11 +5,6 @@ namespace Vouchercodes\Product;
 abstract class Product implements \Vouchercodes\Product\ProductInterface
 {
     /**
-     * @var int
-     */
-    public $quantity = 0;
-
-    /**
      * A public function to get the SKU (a unique code to identify the product)
      *
      * @return mixed

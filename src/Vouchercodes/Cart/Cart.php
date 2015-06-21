@@ -59,9 +59,10 @@ class Cart implements CartInterface
             $line = $this->products[$product->getSku()];
             $price = $product->getPrice();
 
-            foreach($product->discounts() as $level => $discount) {
-                if($line->getQuantity() >= $level) {
-                    $price = $product->getPrice() - $discount;
+            foreach($product->discounts() as $discount) {
+                if($amount = $discount->calculate($line->getQuantity())) {
+                    $price = $product->getPrice() - $amount;
+                    break 1;
                 }
             }
 

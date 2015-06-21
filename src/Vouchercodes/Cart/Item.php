@@ -43,9 +43,7 @@ class Item
 
         for($quantity = 1; $quantity <= $this->quantity; $quantity++) {
             foreach($this->product->discounts() as $discount) {
-                $deduct = $discount->calculate($quantity);
-
-                if($deduct > 0) {
+                if($deduct = $discount->calculate($quantity)) {
                     break 1;
                 }
             }
